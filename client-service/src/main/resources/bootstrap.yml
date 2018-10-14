@@ -1,0 +1,25 @@
+server:
+  port: 8080
+spring:
+  application:
+    name: client-service
+  cloud:
+    config:
+#      uri: http://192.168.0.124:1010/  #配置中心单服务开放
+      discovery:  #配置中心集群开放
+        enabled: true
+        service-id: config-server
+      profile: default
+      #git 加上master    svn  则不用写   主要看config-server那边的配置
+      label: master
+
+#集群部署
+eureka:
+  instance:
+    ip-address: 192.168.31.162
+    #优先使用IP地址作为主机名的标识
+    prefer-ip-address: true
+  client:
+    serviceUrl:
+      defaultZone: http://192.168.31.50:8761/eureka,http://192.168.31.162:8761/eureka
+
